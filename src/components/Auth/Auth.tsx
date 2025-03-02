@@ -1,14 +1,15 @@
+// src/components/Auth/Auth.tsx
 "use client";
-
-import { store } from "../../redux/store";
+import React from "react";
 import { Provider } from "react-redux";
+import { store } from "@/redux/store";
 
-function Auth({ children }:any) {
+function MyApp({ Component, pageProps }: any) {
   return (
     <Provider store={store}>
-        {children}
+      <Component {...pageProps} />
     </Provider>
   );
 }
 
-export default Auth;
+export default MyApp;
