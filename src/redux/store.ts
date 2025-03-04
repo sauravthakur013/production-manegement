@@ -4,6 +4,7 @@ import authReducer from './features/authSlice';
 import ordersReducer from './features/ordersSlice';
 import materialsReducer from './features/materialsSlice';
 import workStationReducer from './features/workStationSlice';
+import operaterReducer from './features/operaterSlice'
 
 
 export const store = configureStore({
@@ -12,6 +13,7 @@ export const store = configureStore({
         orders: ordersReducer,
         materials: materialsReducer,
         workStation: workStationReducer,
+        operaters: operaterReducer
     },
 });
 

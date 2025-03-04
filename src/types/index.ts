@@ -46,3 +46,54 @@ export interface User {
     isLoading: boolean;
     error: string | null;
   }
+
+  export interface OperaterInitiatState{
+    operaters: any[],
+    isLoading: boolean;
+    error: string | null;
+  }
+
+  export interface Operator {
+    _id: string;
+    username: string;
+    email: string;
+    department: string;
+    createdAt: string;
+    allowForStatusChange: boolean;
+  }
+  
+  export interface OperatorListProps {
+    initialOperators: Operator[];
+  }
+
+
+
+  export interface Material {
+    _id: string;
+    name: string;
+  }
+  
+  export interface Workstation {
+    id: string;
+    name: string;
+  }
+  
+  export interface MaterialUsage {
+    materialId: string;
+    quantity: number;
+  }
+  
+  export interface OrderFormData {
+    productName: string;
+    quantity: number;
+    priority: "High" | "Medium" | "Low";
+    workstationId: string;
+    startDate: string;
+    endDate: string;
+    materialsUsed: MaterialUsage[];
+  }
+  
+  export interface AddOrdersProps {
+    materials: any[];
+    workstations: any[];
+  }
