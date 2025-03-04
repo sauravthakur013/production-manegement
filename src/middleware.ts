@@ -35,10 +35,24 @@ export function middleware(request: NextRequest, response: NextResponse) {
     );
     return NextResponse.redirect(new URL("/login", request.nextUrl));
   }
+
+  if (pathname === "/" && isLoggedIn) {
+    console.log(
+      "User is NOT logged in and accessing home page. Redirecting to login."
+    );
+    return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
+  }
+
+  if (pathname === "/control-tower" && isLoggedIn) {
+    console.log(
+      "control-tower"
+    );
+    return NextResponse.next();
+  }
   return NextResponse.next();
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/dashboard", "/profile", "/login", "/register", "/"], // Add all protected routes
+  matcher: ["/dashboard", "/profile", "/login", "/register", "/", "/control-tower"], // Add all protected routes
 };

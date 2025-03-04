@@ -4,6 +4,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/redux/store'; 
 import {loadUserFromLocalStorage}  from '@/redux/features/authSlice'; 
+import Loader from '@/components/UI/Loader';
+import Navbar from '@/components/UI/Navbar';
 
 function Dashboard() {
   const USER = useSelector((state: RootState) => state.auth);
@@ -13,11 +15,17 @@ function Dashboard() {
     dispatch(loadUserFromLocalStorage());
   }, [dispatch]);
 
+  if(!USER.user) {
+    return <Loader/>
+  }
+
   console.log('user--dashboardd-->', USER);
 
   return (
     <div>
-      <h1>Dashboard</h1>
+      <Navbar/>
+      <div className='mt-18'>
+      </div>
     </div>
   );
 }
