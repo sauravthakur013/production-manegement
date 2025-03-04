@@ -40,3 +40,9 @@ export interface User {
     isLoading: boolean;
     error: string | null;
   }
+
+  export interface WorkStationInitialState {
+    data: any[];
+    isLoading: boolean;
+    error: string | null;
+  }

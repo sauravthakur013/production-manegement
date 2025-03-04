@@ -1,12 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import {OrderInitialState, ProductionOrder} from '@/types'
+import Cookies from 'js-cookie';
 
 const initialState:OrderInitialState = {
     orders: [],
     isLoading: false,
     error: null,
 };
+
+const BASE_URL = "http://localhost:5050/api/";
+
 
 export const fetchOrders = createAsyncThunk(
     'orders/fetchOrders',
@@ -30,17 +34,17 @@ export const fetchOrders = createAsyncThunk(
     'orders/createOrder',
     async (orderData: ProductionOrder, { rejectWithValue, getState }) => {
         try {
-           const token = (getState() as any).auth.user.token
+        const token = Cookies.get('token');
             const config = {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
             };
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/orders`, orderData, config);
-            return data;
+            const res = await axios.post(`${BASE_URL}orders`, orderData, config);
+            return res.data;
         } catch (error:any) {
-            return rejectWithValue(error.response?.data?.message || 'Failed to create order');
+            return rejectWithValue(error || 'Failed to create order');
         }
     }
 );

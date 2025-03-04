@@ -1,19 +1,19 @@
-// src/redux/features/materialsSlice.ts
+// src/redux/features/workStationSlice.ts
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import {MaterialInitialState} from '@/types'
+import {WorkStationInitialState} from '@/types'
 import Cookies from 'js-cookie';
 
-const initialState:MaterialInitialState = {
-    materials: [],
+const initialState:WorkStationInitialState = {
+    data: [],
     isLoading: false,
     error: null,
 };
 
 const BASE_URL = "http://localhost:5050/api/";
 
-export const fetchMaterials = createAsyncThunk(
-    'materials/fetchMaterials',
+export const fetchWorkStations = createAsyncThunk(
+    'workStation/fetchWorkStations',
     async (_, { rejectWithValue, getState }) => {
         try {
            const token = Cookies.get('token');
@@ -22,7 +22,7 @@ export const fetchMaterials = createAsyncThunk(
                     Authorization: `Bearer ${token}`,
                 },
             };
-            const res = await axios.get(`${BASE_URL}materials/${Cookies.get('userID')}`, config);
+            const res = await axios.get(`${BASE_URL}materials/workStation/${Cookies.get('userID')}`, config);
             return res.data.data;
         } catch (error:any) {
             return rejectWithValue(error || 'Failed to fetch materials');
@@ -30,25 +30,25 @@ export const fetchMaterials = createAsyncThunk(
     }
 );
 
-const materialsSlice = createSlice({
-    name: 'materials',
+const workStationSlice = createSlice({
+    name: 'workStation',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchMaterials.pending, (state) => {
+            .addCase(fetchWorkStations.pending, (state) => {
                 state.isLoading = true;
                 state.error = null;
             })
-            .addCase(fetchMaterials.fulfilled, (state, action) => {
+            .addCase(fetchWorkStations.fulfilled, (state, action) => {
                 state.isLoading = false;
-                state.materials = action.payload;
+                state.data = action.payload;
             })
-            .addCase(fetchMaterials.rejected, (state, action) => {
+            .addCase(fetchWorkStations.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload as string;
             });
     },
 });
 
-export default materialsSlice.reducer;
+export default workStationSlice.reducer;
