@@ -1,7 +1,7 @@
 // src/app/page.tsx
 "use client";
-import Auth from "@/components/Auth/Auth";
+// import Auth from "@/components/Auth/Auth";
 
 export default function Home() {
-  return <Auth />;
+  return <div> </div>;
 }

@@ -14,7 +14,7 @@ const BASE_URL = "http://localhost:5050/api/";
 
 export const fetchMaterials = createAsyncThunk(
     'materials/fetchMaterials',
-    async (_, { rejectWithValue, getState }) => {
+    async (_, { rejectWithValue }) => {
         try {
            const token = Cookies.get('token');
             const config = {

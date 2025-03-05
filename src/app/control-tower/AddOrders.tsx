@@ -1,18 +1,16 @@
 // src/app/control-tower/AddOrders.tsx
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Plus, X, Check, Loader } from "lucide-react";
 
 import { createOrder } from "@/redux/features/ordersSlice";
-import { AppDispatch, RootState } from "@/redux/store";
+import { AppDispatch } from "@/redux/store";
 import { useDispatch } from "react-redux"; // Import useDispatch
-import { useSelector } from "react-redux";
 import {
-  Material,
-  Workstation,
-  MaterialUsage,
   OrderFormData,
   AddOrdersProps,
 } from "@/types/index";
+import Cookies from "js-cookie";
+import toast, { Toaster } from "react-hot-toast";
 
 const AddOrderForm: React.FC<AddOrdersProps> = ({
   materials,
@@ -37,6 +35,12 @@ const AddOrderForm: React.FC<AddOrdersProps> = ({
   });
 
   const toggleExpand = () => {
+
+    if(Cookies.get('role') !== 'Manager') {
+      toast.error("You don't have manager permission");
+      return;
+    }
+
     setIsExpanded(!isExpanded);
     if (showSuccess) setShowSuccess(false);
   };
@@ -126,6 +130,7 @@ const AddOrderForm: React.FC<AddOrdersProps> = ({
 
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-500 ease-in-out border border-gray-200">
+      <Toaster/>
       {/* Header */}
       <div
         className="bg-blue-600 p-4 flex justify-between items-center cursor-pointer"
@@ -133,7 +138,7 @@ const AddOrderForm: React.FC<AddOrdersProps> = ({
       >
         <h2 className="text-white font-semibold text-lg flex items-center">
           <Plus className="mr-2 h-5 w-5" />
-          Add Production Order
+          Add Production Order <span className="text-sm font-light ml-3">(Manager Access)</span>
         </h2>
         {isExpanded && (
           <X className="h-5 w-5 text-white hover:text-gray-200 transition-colors" />

@@ -1,11 +1,10 @@
 // src/components/UI/Navbar.tsx
 import React, { useState, useEffect } from 'react';
-import { Menu, X, User, LayoutDashboard, LineChart } from 'lucide-react';
+import { User, LayoutDashboard, LineChart } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const currentPage = usePathname();
 
   // Handle scroll effect
@@ -27,7 +26,7 @@ function Navbar() {
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300  ${
         isScrolled 
           ? 'bg-white shadow-md py-2' 
           : 'bg-white/95 border-b border-gray-200 py-3'

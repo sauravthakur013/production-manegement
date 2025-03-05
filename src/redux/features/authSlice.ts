@@ -1,7 +1,7 @@
 // src/redux/features/authSlice.ts
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { AuthInitialState, User } from "@/types/index";
+import { AuthInitialState } from "@/types/index";
 import Cookies from "js-cookie";
 
 const initialState: AuthInitialState = {
@@ -50,6 +50,7 @@ export const loginUser = createAsyncThunk(
         userData,
         config
       );
+      console.log(data);
 
       Cookies.set("token", data.data.token);
       Cookies.set("userID", data.data._id);
@@ -57,6 +58,7 @@ export const loginUser = createAsyncThunk(
       Cookies.set("username", data.data.username);
       Cookies.set("email", data.data.email);
       Cookies.set("department", data.data.department);
+      Cookies.set("allowForStatusChange", data.data.allowForStatusChange);
       
       return data; // Return the user data on success
     } catch (error: any) {
@@ -80,6 +82,7 @@ const authSlice = createSlice({
       Cookies.remove("username");
       Cookies.remove("email");
       Cookies.remove("department");
+      Cookies.remove("allowForStatusChange");
     },
     // Add a reducer to load user data from local storage on app initialization
     loadUserFromLocalStorage: (state ?:any ) => {

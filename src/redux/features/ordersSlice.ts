@@ -14,25 +14,26 @@ const BASE_URL = "http://localhost:5050/api/";
 
 export const fetchOrders = createAsyncThunk(
     'orders/fetchOrders',
-    async (_, { rejectWithValue, getState }) => {
+    async (_, { rejectWithValue }) => {
         try {
-           const token = (getState() as any).auth.user.token
+            const token = Cookies.get('token');
             const config = {
                 headers: {
                     Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
                 },
             };
-            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/orders`, config);
-            return data;
+            const res = await axios.get(`${BASE_URL}orders`, config);
+            return res.data.data;
         } catch (error:any) {
-            return rejectWithValue(error.response?.data?.message || 'Failed to fetch orders');
+            return rejectWithValue(error || 'Failed to fetch orders');
         }
     }
 );
 
  export const createOrder = createAsyncThunk(
     'orders/createOrder',
-    async (orderData: ProductionOrder, { rejectWithValue, getState }) => {
+    async (orderData: ProductionOrder, { rejectWithValue }) => {
         try {
         const token = Cookies.get('token');
             const config = {

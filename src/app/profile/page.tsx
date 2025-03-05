@@ -8,7 +8,7 @@ import {
   LogOut,
 } from "lucide-react";
 import Navbar from "@/components/UI/Navbar";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { loadUserFromLocalStorage, logout } from "@/redux/features/authSlice";

@@ -15,7 +15,7 @@ const BASE_URL = "http://localhost:5050/api/";
 
 export const fetchOperaters = createAsyncThunk(
     'operaters/fetchOperaters',
-    async (_, { rejectWithValue, getState }) => {
+    async (_, { rejectWithValue }) => {
         try {
            const token = Cookies.get('token');
             const config = {

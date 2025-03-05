@@ -2,16 +2,13 @@
 "use client";
 import React, { useState } from "react";
 import { User, Lock, ArrowRight } from "lucide-react";
-import { httpPost } from "@/utils/server";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { errorHandle } from "@/utils/errorHandle";
-import Cookies from "js-cookie";
 import { useDispatch } from 'react-redux';
-import { registerUser, loginUser, loadUserFromLocalStorage } from "@/redux/features/authSlice";
+import { loginUser } from "@/redux/features/authSlice";
 import { AppDispatch } from '@/redux/store'; 
-import { useSelector } from 'react-redux';
-import { RootState } from '@/redux/store'; 
+
 
 function Login() {
   const router = useRouter();
@@ -198,7 +195,7 @@ function Login() {
 
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
-              Don't have an account?{" "}
+              {"Don't have an account?"}{" "}
               <a
                 href="/register"
                 className="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center"

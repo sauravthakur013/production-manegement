@@ -2,8 +2,9 @@
 import React, { useEffect, useState } from "react";
 import { Switch } from "@/components/UI/Switch";
 import { Clock, User, Mail, Building } from "lucide-react";
-import { httpGet, httpPost } from "@/utils/server";
+import { httpGet } from "@/utils/server";
 import { Operator, OperatorListProps } from "@/types/index";
+import toast, { Toaster } from "react-hot-toast";
 
 function OperatorList({ initialOperators }: OperatorListProps) {
   const [operators, setOperators] = useState<Operator[]>(initialOperators);
@@ -18,6 +19,7 @@ function OperatorList({ initialOperators }: OperatorListProps) {
       setLoading((prev) => ({ ...prev, [operatorId]: true }));
       await httpGet(`/api/auth//update/operaters/${operatorId}`);
       //   Update local state after successful API call
+      toast.success("Status updated successfully");
       setOperators((prevOperators) =>
         prevOperators.map((operator) =>
           operator._id === operatorId
@@ -25,8 +27,9 @@ function OperatorList({ initialOperators }: OperatorListProps) {
             : operator
         )
       );
-    } catch (error) {
-      console.error("Failed to update operator status:", error);
+    } catch (error:any) {
+      console.error("Failed to update operator status:", error.response.data.message);
+      toast.error(error.response.data.message);
       // Handle error (e.g., show error message to user)
     } finally {
       setLoading((prev) => ({ ...prev, [operatorId]: false }));
@@ -46,6 +49,7 @@ function OperatorList({ initialOperators }: OperatorListProps) {
 
   return (
     <div className="bg-white shadow-md rounded-lg overflow-hidden mt-8">
+      <Toaster/>
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">

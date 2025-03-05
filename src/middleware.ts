@@ -1,13 +1,12 @@
 // ./middleware.ts
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import Cookies from "js-cookie";
 
 // This function can be marked `async` if using `await` inside
-export function middleware(request: NextRequest, response: NextResponse) {
+export function middleware(request: NextRequest) {
   const isLoggedIn = request.cookies.get("token")?.value ? true : false; // Adjust cookie name and value as needed
   const pathname = request.nextUrl.pathname;
-  const publicPaths = ["/login", "/register"];
+  const publicPaths = ["/login", "/register", "/welcome"];
   const isPublicPath = publicPaths.includes(pathname);
 
   // Scenario 1: User is logged in and trying to access a public page (/login, /register)
@@ -19,7 +18,7 @@ export function middleware(request: NextRequest, response: NextResponse) {
   // Scenario 2: User is NOT logged in and trying to access a protected page.
   if (!isPublicPath && !isLoggedIn) {
     console.log("Redirecting from protected page to login");
-    return NextResponse.redirect(new URL("/login", request.nextUrl));
+    return NextResponse.redirect(new URL("/welcome", request.nextUrl));
   }
 
   // Scenario 3: User IS logged in and trying to access the dashboard.  Allow access.  No redirect needed.
@@ -33,12 +32,19 @@ export function middleware(request: NextRequest, response: NextResponse) {
     console.log(
       "User is NOT logged in and accessing home page. Redirecting to login."
     );
-    return NextResponse.redirect(new URL("/login", request.nextUrl));
+    return NextResponse.redirect(new URL("/welcome", request.nextUrl));
   }
 
   if (pathname === "/" && isLoggedIn) {
     console.log(
       "User is NOT logged in and accessing home page. Redirecting to login."
+    );
+    return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
+  }
+
+  if (pathname === "/welcome" && isLoggedIn) {
+    console.log(
+      "welcome to login"
     );
     return NextResponse.redirect(new URL("/dashboard", request.nextUrl));
   }
@@ -54,5 +60,5 @@ export function middleware(request: NextRequest, response: NextResponse) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/dashboard", "/profile", "/login", "/register", "/", "/control-tower"], // Add all protected routes
+  matcher: ["/dashboard", "/profile", "/login", "/register", "/", "/control-tower", "/welcome"], // Add all protected routes
 };
