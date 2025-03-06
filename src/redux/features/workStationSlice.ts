@@ -10,7 +10,7 @@ const initialState:WorkStationInitialState = {
     error: null,
 };
 
-const BASE_URL = "http://localhost:5050/api/";
+const BASE_URL = "https://prod-mange-backend.onrender.com/api/";
 
 export const fetchWorkStations = createAsyncThunk(
     'workStation/fetchWorkStations',

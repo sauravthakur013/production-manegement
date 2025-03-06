@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { User, LayoutDashboard, LineChart } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import Cookies from "js-cookie";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -78,7 +79,11 @@ function Navbar() {
               } rounded`}
             >
               <User size={18} />
-              <span>Profile</span>
+              <div className='relative'>
+                <div>Profile <span className='relative bottom-[1px] text-[12px] font-extrabold'>({Cookies.get('role')})</span></div>
+                <div ></div>
+              </div>
+              {/* <span>Profile</span> */}
             </a>
           </div>
 

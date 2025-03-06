@@ -43,7 +43,7 @@ function ControlTower() {
             Operaters List
           </h1>
           <p className="text-gray-600">
-            Allow them to change the status of orders.
+            Allow them to change the status of orders. (Manager Access)
           </p>
         </div>
 

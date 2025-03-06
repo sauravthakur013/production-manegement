@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "http://localhost:5050";
+const BASE_URL = "https://prod-mange-backend.onrender.com";
 import Cookies from "js-cookie";
 
 const getToken = (): string | null => {
