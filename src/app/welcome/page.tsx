@@ -82,7 +82,7 @@ function Welcome() {
         {/* Benefits Section */}
         <div className="bg-white rounded-lg shadow-lg p-12 mb-16">
           <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-            Why Choose ProductionHub?
+            Why Choose Production?
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <BenefitCard
@@ -102,7 +102,7 @@ function Welcome() {
           </h3>
           <p className="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
             Join thousands of companies that have already revolutionized their
-            manufacturing process with ProductionHub.
+            manufacturing process with Production.
           </p>
           <button className="px-8 py-3 bg-white text-blue-800 rounded-md hover:bg-blue-50 transition-colors duration-200 font-semibold text-lg">
             Get Started Now
@@ -114,7 +114,7 @@ function Welcome() {
       <footer className="bg-white mt-16 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-gray-600">
-            <p>© 2025 ProductionHub. All rights reserved.</p>
+            <p>© 2025 Production. All rights reserved.</p>
           </div>
         </div>
       </footer>

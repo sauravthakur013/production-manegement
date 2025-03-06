@@ -86,6 +86,15 @@ function Login() {
     }
   };
 
+  const handleManagerLogin = () => {
+    setFormData({ username: "sauravthakur130", password: "123456" });
+  };
+
+  const handleOperatorLogin = () => {
+    setFormData({ username: "sauravthakur13000", password: "123456" });
+  };
+
+
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <Toaster />
@@ -192,6 +201,23 @@ function Login() {
               )}
             </button>
           </form>
+
+            <div className="mt-4 flex justify-around">
+              <button
+                type="button"
+                onClick={handleManagerLogin}
+                className="text-sm text-gray-600 hover:text-blue-800"
+              >
+                Login as Test Manager
+              </button>
+              <button
+                type="button"
+                onClick={handleOperatorLogin}
+                className="text-sm text-gray-600 hover:text-blue-800"
+              >
+                Login as Test Operator
+              </button>
+            </div>
 
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
